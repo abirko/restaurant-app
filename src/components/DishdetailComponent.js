@@ -13,11 +13,10 @@ class Dishdetail extends Component {
                         {
                             dish.comments.map((item, index) => {
                                 return (
-                                    <ListGroup>
+                                    <ListGroup style={{marginBottom:10}}>
                                         <ListGroupItem>{item.author}</ListGroupItem>
                                         <ListGroupItem>{item.comment}</ListGroupItem>
-                                        <ListGroupItem>{item.date}</ListGroupItem>
-                                        <ListGroupItem>-----------</ListGroupItem>
+                                        <ListGroupItem>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(item.date)))}</ListGroupItem>
                                     </ListGroup>
 
                                 )
@@ -28,11 +27,11 @@ class Dishdetail extends Component {
         )
     }
     render() {
-        var dish = this.props.selectedDish
+        var dish = this.props.dish
         console.log(dish)
         return (
             dish != null ?
-                <div className="row">
+                <div className="container">
                     <Card className="col-12 col-md-5 m-1">
                         <CardImg top src={dish.image} alt={dish.name} />
                         <CardBody>
