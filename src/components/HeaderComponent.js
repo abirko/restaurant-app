@@ -1,5 +1,6 @@
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import React, { Component } from 'react';
 
 class Header extends Component {
     constructor(props) {
@@ -46,8 +47,8 @@ class Header extends Component {
                     <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                                <h1>My Resto</h1>
+                                <p>We take inspiration from the World's best cuisines, and create a unique meals experience. Our lipsmacking creations will tickle your culinary senses!</p>
                             </div>
                         </div>
                     </div>
@@ -56,3 +57,4 @@ class Header extends Component {
         );
     }
 }
+export default Header;
