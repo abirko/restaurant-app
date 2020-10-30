@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {
-    Breadcrumb, BreadcrumbItem,
-    Button, Form, FormGroup, Label, Input, Col
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback } from 'reactstrap';
 
 class Contact extends Component {
 
@@ -29,7 +26,7 @@ class Contact extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
-
+    
     handleBlur = (field) => (evt) => {
         this.setState({
             touched: { ...this.state.touched, [field]: true }
@@ -82,8 +79,7 @@ class Contact extends Component {
     }
 
     render() {
-        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
-        return (
+        const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);        return (
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -132,7 +128,7 @@ class Contact extends Component {
                                         invalid={errors.firstname !== ''}
                                         onBlur={this.handleBlur('firstname')}
                                         onChange={this.handleInputChange} />
-                                     <p>{errors.firstname}</p>
+                                    <FormFeedback>{errors.firstname}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -145,7 +141,7 @@ class Contact extends Component {
                                         invalid={errors.lastname !== ''}
                                         onBlur={this.handleBlur('lastname')}
                                         onChange={this.handleInputChange} />
-                                    <p>{errors.lastname}</p>
+                                    <FormFeedback>{errors.lastname}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -158,7 +154,7 @@ class Contact extends Component {
                                         invalid={errors.telnum !== ''}
                                         onBlur={this.handleBlur('telnum')}
                                         onChange={this.handleInputChange} />
-                                    <p>{errors.telnum}</p>
+                                    <FormFeedback>{errors.telnum}</FormFeedback>
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
@@ -171,10 +167,9 @@ class Contact extends Component {
                                         invalid={errors.email !== ''}
                                         onBlur={this.handleBlur('email')}
                                         onChange={this.handleInputChange} />
-                                    <p>{errors.email}</p>
+                                    <FormFeedback>{errors.email}</FormFeedback>
                                 </Col>
                             </FormGroup>
-                            
                             <FormGroup row>
                                 <Col md={{ size: 6, offset: 2 }}>
                                     <FormGroup check>
