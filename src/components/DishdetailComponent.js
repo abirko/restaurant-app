@@ -36,7 +36,6 @@ function RenderComments({ comments }) {
                                 <ListGroupItem>{item.comment}</ListGroupItem>
                                 <ListGroupItem>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(item.date)))}</ListGroupItem>
                             </ListGroup>
-
                         )
                     })
                 }
@@ -47,8 +46,8 @@ function RenderComments({ comments }) {
 
 const Dishdetail = (props) => {
     var dish = props.dish
-    console.log(dish)
-
+    var addComment = props.addComment 
+    var dishId = props.dish.id
     return (
         dish != null ?
             <div className="container">
@@ -68,7 +67,7 @@ const Dishdetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={props.comments} />
-                        <CommentForm />
+                        <CommentForm dishId={dishId} addComment={addComment}/>
                     </div>
 
                 </div>
@@ -96,14 +95,13 @@ export class CommentForm extends Component {
 
     handleSubmit(values) {
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
         const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
         const minLength = (len) => (val) => val && (val.length >= len);
-
-
         return (
             <div>
                 <Button outline onClick={this.toggleModal}><span className="fa fa-pencil fa-lg"></span>Submit Comment</Button>
