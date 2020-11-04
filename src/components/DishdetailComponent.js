@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-
+import { Loading } from './LoadingComponent';
 
 function RenderDish({ dish }) {
     return (
@@ -48,8 +48,26 @@ const Dishdetail = (props) => {
     var dish = props.dish
     var addComment = props.addComment 
     var dishId = props.dish.id
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish != null) 
     return (
-        dish != null ?
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -71,8 +89,7 @@ const Dishdetail = (props) => {
                     </div>
 
                 </div>
-            </div> :
-            <div></div>
+            </div> 
     )
 }
 
