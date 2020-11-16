@@ -24,7 +24,7 @@ function RenderDish({ dish }) {
     );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({comments}) {
     return (
         <Card>
             <CardBody>
@@ -47,7 +47,7 @@ function RenderComments({ comments }) {
 
 const Dishdetail = (props) => {
     var dish = props.dish
-    var addComment = props.addComment 
+    var postComment= props.postComment
     var dishId = props.dish.id
     if (props.isLoading) {
         return(
@@ -86,7 +86,7 @@ const Dishdetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         <RenderComments comments={props.comments} />
-                        <CommentForm dishId={dishId} addComment={addComment}/>
+                        <CommentForm dishId={dishId} postComment={postComment}/>
                     </div>
 
                 </div>
@@ -114,6 +114,7 @@ export class CommentForm extends Component {
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }
