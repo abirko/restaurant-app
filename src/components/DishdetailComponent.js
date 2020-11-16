@@ -7,13 +7,14 @@ import {
 
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, LocalForm, Errors ,actions , Form} from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderDish({ dish }) {
     return (
         <Card>
-            <CardImg top src={dish.image} alt={dish.name} />
+             <CardImg top src={baseUrl + dish.image} alt={dish.name} />
             <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
@@ -111,10 +112,11 @@ export class CommentForm extends Component {
     }
 
     handleSubmit(values) {
+        console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.resetFeedbackForm();
+        // event.preventDefault();
     }
-
     render() {
         const required = (val) => val && val.length;
         const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -125,8 +127,7 @@ export class CommentForm extends Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-                            <Row className="form-group">
+                    <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>                            <Row className="form-group">
                                 <Label htmlFor="firstname" md={12}>Rating</Label>
                                 <Col md={12}>
                                     <Control.text model=".rating" id="rating" name="rating"  type="number"
@@ -172,7 +173,7 @@ export class CommentForm extends Component {
                                     </Button>
                                 </Col>
                             </Row>
-                        </LocalForm>
+                        </Form>
                     </ModalBody>
                 </Modal>
             </div>
